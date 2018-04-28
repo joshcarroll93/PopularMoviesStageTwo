@@ -20,10 +20,10 @@ import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviespar
 
 public class MovieReviewsQuery extends AsyncTask<URL, Void, String> {
 
-    WeakReference<MovieDetailActivity> movieDetailActivityWeakReference;
+    private WeakReference<MovieDetailActivity> movieDetailActivityWeakReference;
 
-    public MovieReviewsQuery(MovieDetailActivity movieDetailActivity){
-        movieDetailActivityWeakReference = new WeakReference<MovieDetailActivity>(movieDetailActivity);
+    public MovieReviewsQuery(MovieDetailActivity movieDetailActivity) {
+        movieDetailActivityWeakReference = new WeakReference<>(movieDetailActivity);
     }
 
 
@@ -32,10 +32,9 @@ public class MovieReviewsQuery extends AsyncTask<URL, Void, String> {
         URL searchURL = urls[0];
         String reviewResult = null;
 
-        try{
+        try {
             reviewResult = NetworkUtils.getResponseFromHttpUrl(searchURL);
-        }
-        catch(IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return reviewResult;
@@ -43,15 +42,19 @@ public class MovieReviewsQuery extends AsyncTask<URL, Void, String> {
 
     @Override
     protected void onPostExecute(String reviewResults) {
-        MovieDetailActivity movieDetailActivity =  movieDetailActivityWeakReference.get();
+        MovieDetailActivity movieDetailActivity = movieDetailActivityWeakReference.get();
 
-        if(reviewResults != null){
-            try{
+        if (reviewResults != null && !reviewResults.contains("\"results\":[]")) {
+
+            movieDetailActivity.showReviews();
+            try {
                 List<Review> reviews = JsonUtils.getMovieReviews(reviewResults);
                 movieDetailActivity.movieReviewsAdapter.addReviews(reviews);
-            }catch (JSONException jse){
+            } catch (JSONException jse) {
                 jse.printStackTrace();
             }
+        } else {
+            movieDetailActivity.hideReviews();
         }
     }
 }

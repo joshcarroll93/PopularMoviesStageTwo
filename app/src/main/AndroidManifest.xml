@@ -26,11 +26,11 @@
             android:theme="@style/DetailTheme" />
 
         <provider
-            android:name=".provider.MovieContentProvider"
+            android:name="popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.provider.MovieContentProvider"
             android:authorities="popularmoviesstagetwo.joshcarroll.nanodegree.android"
             android:exported="false" />
 
-        <activity android:name=".fragment.MovieTabLayoutFragment"></activity>
+
     </application>
 
 </manifest>

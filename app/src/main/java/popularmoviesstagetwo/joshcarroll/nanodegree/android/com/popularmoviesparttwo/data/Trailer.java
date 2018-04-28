@@ -22,7 +22,7 @@ public class Trailer implements Parcelable {
         this.type = type;
     }
 
-    public Trailer(Parcel parcel){
+    private Trailer(Parcel parcel) {
         key = parcel.readString();
         name = parcel.readString();
         site = parcel.readString();
@@ -70,6 +70,7 @@ public class Trailer implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
 
     }
+
     public static Creator<Trailer> CREATOR = new Creator<Trailer>() {
         @Override
         public Trailer createFromParcel(Parcel parcel) {

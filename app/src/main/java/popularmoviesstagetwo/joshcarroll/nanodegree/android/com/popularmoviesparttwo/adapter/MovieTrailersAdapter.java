@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,28 +27,30 @@ import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviespar
  * Created by Josh on 28/03/2018.
  */
 
-public class MovieTrailersAdapter extends RecyclerView.Adapter<MovieTrailersAdapter.MovieTrailerViewHolder>{
+public class MovieTrailersAdapter extends RecyclerView.Adapter<MovieTrailersAdapter.MovieTrailerViewHolder> {
 
     private List<Trailer> mTrailers;
     private Context mContext;
 
-    public MovieTrailersAdapter(List<Trailer> trailers, Context context){
+    public MovieTrailersAdapter(List<Trailer> trailers, Context context) {
         mTrailers = trailers;
         mContext = context;
     }
 
-    public void addTrailers(List<Trailer> newTrailers){
+    public void addTrailers(List<Trailer> newTrailers) {
         mTrailers.clear();
         mTrailers.addAll(newTrailers);
         notifyDataSetChanged();
     }
+
+    @NonNull
     @Override
-    public MovieTrailerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieTrailerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MovieTrailerViewHolder(LayoutInflater.from(mContext).inflate(R.layout.trailer_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final MovieTrailerViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MovieTrailerViewHolder holder, final int position) {
 
         final String youtubeBaseUrl = "http://www.youtube.com/watch?v=";
         String thumbnailBaseUrl = "https://img.youtube.com/vi/";

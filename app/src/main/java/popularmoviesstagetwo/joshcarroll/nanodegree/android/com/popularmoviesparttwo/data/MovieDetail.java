@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Josh on 27/03/2018.
  */
 
-public class MovieDetail implements Parcelable{
+public class MovieDetail implements Parcelable {
 
     String MDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
     String MDB_IMAGE_SIZE_500 = "w500/";
@@ -22,7 +22,7 @@ public class MovieDetail implements Parcelable{
     private String mBackdropPath;
     private String mTagline;
 
-    public MovieDetail(String title, int runtime, String releaseDate, double voteAverage, String overview, String posterPath, String backdropPath, String tagline){
+    public MovieDetail(String title, int runtime, String releaseDate, double voteAverage, String overview, String posterPath, String backdropPath, String tagline) {
 
         mTitle = title;
         mRuntime = runtime;
@@ -34,7 +34,7 @@ public class MovieDetail implements Parcelable{
         mTagline = tagline;
     }
 
-    public MovieDetail(Parcel parcel){
+    private MovieDetail(Parcel parcel) {
         mTitle = parcel.readString();
         mRuntime = parcel.readInt();
         mReleaseDate = parcel.readString();
@@ -44,6 +44,7 @@ public class MovieDetail implements Parcelable{
         mBackdropPath = parcel.readString();
         mTagline = parcel.readString();
     }
+
     public String getmTitle() {
         return mTitle;
     }
@@ -68,11 +69,11 @@ public class MovieDetail implements Parcelable{
         this.mReleaseDate = mReleaseDate;
     }
 
-    public double getmVoteAverage(){
+    public double getmVoteAverage() {
         return mVoteAverage;
     }
 
-    public void setmVoteAverage(double voteAverage){
+    public void setmVoteAverage(double voteAverage) {
         this.mVoteAverage = voteAverage;
     }
 
@@ -93,7 +94,7 @@ public class MovieDetail implements Parcelable{
     }
 
     public String getmBackdropPath() {
-        return MDB_IMAGE_BASE_URL + MDB_IMAGE_SIZE_500 +mBackdropPath;
+        return MDB_IMAGE_BASE_URL + MDB_IMAGE_SIZE_500 + mBackdropPath;
     }
 
     public void setmBackdropPath(String mBackdropPath) {
@@ -124,6 +125,7 @@ public class MovieDetail implements Parcelable{
         parcel.writeString(mBackdropPath);
         parcel.writeString(mTagline);
     }
+
     public static final Creator<MovieDetail> CREATOR = new Creator<MovieDetail>() {
         @Override
         public MovieDetail createFromParcel(Parcel parcel) {

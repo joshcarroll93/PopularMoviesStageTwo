@@ -1,6 +1,7 @@
 package popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,23 +27,26 @@ public class MovieReviewsAdapter extends RecyclerView.Adapter<MovieReviewsAdapte
         mContext = context;
     }
 
-    public void addReviews(List<Review> newReviews){
+    public void addReviews(List<Review> newReviews) {
 
-        if(mReviews != null){
-            mReviews.clear();
+        if (mReviews != null)
             mReviews.addAll(newReviews);
-        }
+
         notifyDataSetChanged();
     }
+
+    @NonNull
     @Override
-    public ReviewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ReviewViewHolder(LayoutInflater.from(mContext).inflate(R.layout.review_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ReviewViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
+
+        String quotations = " \"" + mReviews.get(position).getContent() + " \"";
         holder.author.setText(mReviews.get(position).getAuthor());
-        holder.content.setText(mReviews.get(position).getContent());
+        holder.content.setText(quotations);
     }
 
     @Override
@@ -50,12 +54,12 @@ public class MovieReviewsAdapter extends RecyclerView.Adapter<MovieReviewsAdapte
         return mReviews.size();
     }
 
-    public class ReviewViewHolder extends RecyclerView.ViewHolder{
+    class ReviewViewHolder extends RecyclerView.ViewHolder {
 
         private TextView author;
         private TextView content;
 
-        public ReviewViewHolder(View itemView) {
+        ReviewViewHolder(View itemView) {
             super(itemView);
             author = itemView.findViewById(R.id.tv_author);
             content = itemView.findViewById(R.id.tv_content);

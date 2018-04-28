@@ -17,7 +17,7 @@ public class Review implements Parcelable {
         this.content = content;
     }
 
-    public Review(Parcel parcel){
+    private Review(Parcel parcel) {
         author = parcel.readString();
         content = parcel.readString();
     }
@@ -49,6 +49,7 @@ public class Review implements Parcelable {
         parcel.writeString(author);
         parcel.writeString(content);
     }
+
     public static final Creator<Review> CREATOR = new Creator<Review>() {
         @Override
         public Review createFromParcel(Parcel parcel) {

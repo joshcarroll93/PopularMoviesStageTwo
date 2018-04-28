@@ -1,124 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:descendantFocusability="blocksDescendants">
 
     <RelativeLayout
+        android:id="@+id/movie_detail_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/movie_detail_layout"
         android:visibility="visible">
 
         <ImageView
-            android:paddingTop="16dp"
+            android:id="@+id/id_detail_poster"
             android:layout_width="130dp"
             android:layout_height="180dp"
-            android:id="@+id/id_detail_poster"
-            android:contentDescription="@string/movie_detail_poster" />
+            android:contentDescription="@string/movie_detail_poster"
+            android:paddingTop="16dp" />
 
         <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/id_release_date"
-            android:textSize="26sp"
-            android:layout_toRightOf="@+id/id_detail_poster"
-            android:layout_toEndOf="@+id/id_detail_poster"
-            tools:text="@string/movie_detail"
-            android:fontFamily="sans-serif-light"/>
-
-        <TextView
-            android:layout_marginTop="16dp"
-            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@+id/id_detail_poster"
+            android:layout_toRightOf="@+id/id_detail_poster"
+            android:fontFamily="sans-serif-light"
+            android:textSize="26sp"
+            tools:text="@string/movie_detail" />
+
+        <TextView
             android:id="@+id/id_runtime"
-            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/id_release_date"
+            android:layout_marginTop="16dp"
             android:layout_toEndOf="@+id/id_detail_poster"
             android:layout_toRightOf="@+id/id_detail_poster"
             android:fontFamily="sans-serif-thin"
+            android:textColor="@color/black"
+            android:textSize="24sp"
             android:textStyle="italic"
-            tools:text="@string/release_date"/>
+            tools:text="@string/release_date" />
 
         <TextView
-            android:layout_marginTop="16dp"
-            android:textColor="@color/black"
+            android:id="@+id/id_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/id_rating"
-            android:textSize="16sp"
             android:layout_below="@+id/id_runtime"
+            android:layout_marginTop="16dp"
             android:layout_toEndOf="@id/id_detail_poster"
             android:layout_toRightOf="@id/id_detail_poster"
             android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
-            tools:text="rating"/>
+            tools:text="rating" />
 
         <TextView
+            android:id="@+id/id_overview"
             style="@style/MovieDetailPadding"
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/id_overview"
-            android:textSize="18sp"
             android:layout_below="@id/id_detail_poster"
+            android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed"
-            tools:text="@string/Overview"/>
+            android:textSize="18sp"
+            tools:text="@string/Overview" />
 
         <View
+            android:id="@+id/divider_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/id_overview"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:id="@+id/divider_view"
-            android:layout_below="@+id/id_overview"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"/>
+            android:background="@color/black" />
 
         <TextView
-            style="@style/title_text"
             android:id="@+id/trailer_label"
+            style="@style/title_text"
             android:layout_below="@id/divider_view"
             android:text="@string/trailers" />
 
         <android.support.v7.widget.RecyclerView
-
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal"
+            android:id="@+id/trailer_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/trailer_label"
-            android:id="@+id/trailer_recycler_view"/>
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:visibility="invisible" />
 
         <TextView
-            style="@style/title_text"
-            android:layout_marginTop="32dp"
-            android:id="@+id/review_label"
-            android:layout_below="@id/trailer_recycler_view"
-            android:text="@string/reviews"/>
-        <android.support.v7.widget.RecyclerView
-            style="@style/MovieDetailPadding"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:layout_below="@+id/review_label"
-            android:layout_marginBottom="16dp"
-            android:id="@+id/review_recycler_view"
+            android:id="@+id/trailer_error_msg"
+            style="@style/ErrorMsgStyle"
+            android:layout_below="@+id/trailer_label"
+            android:text="@string/error_msg_trailers"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/divider_view2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="1dp"
+            android:layout_below="@+id/trailer_recycler_view"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/review_label"
+            style="@style/title_text"
+            android:layout_below="@id/trailer_recycler_view"
+            android:layout_marginTop="16dp"
+            android:text="@string/reviews" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/review_recycler_view"
+            style="@style/MovieDetailPadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/review_label"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:paddingBottom="50dp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/review_error_msg"
+            style="@style/ErrorMsgStyle"
+            android:layout_below="@id/review_label"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="100dp"
+            android:text="@string/error_msg_reviews"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 
     <ProgressBar
+        android:id="@+id/pb_movie_detail"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:indeterminate="true"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/pb_movie_detail"
-        android:visibility="invisible"/>
+        android:layout_centerVertical="true"
+        android:indeterminate="true"
+        android:visibility="invisible" />
 
 </RelativeLayout>

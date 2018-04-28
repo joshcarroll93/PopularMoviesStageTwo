@@ -16,12 +16,12 @@ import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviespar
  * Created by Josh on 09/04/2018.
  */
 
-public  class MovieDetailQuery extends android.os.AsyncTask<URL, Void, String>{
-    String TAG = "MovieDetailTask";
+public class MovieDetailQuery extends android.os.AsyncTask<URL, Void, String> {
+    private String TAG = "MovieDetailTask";
 
-    WeakReference<MovieDetailActivity> movieDetailActivityWeakReference;
+    private WeakReference<MovieDetailActivity> movieDetailActivityWeakReference;
 
-    public MovieDetailQuery(MovieDetailActivity movieDetailActivity){
+    public MovieDetailQuery(MovieDetailActivity movieDetailActivity) {
         movieDetailActivityWeakReference = new WeakReference<>(movieDetailActivity);
     }
 
@@ -40,9 +40,9 @@ public  class MovieDetailQuery extends android.os.AsyncTask<URL, Void, String>{
         Log.i(TAG, searchURL.toString());
         String movieResult = null;
 
-        try{
+        try {
             movieResult = NetworkUtils.getResponseFromHttpUrl(searchURL);
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return movieResult;
@@ -52,13 +52,16 @@ public  class MovieDetailQuery extends android.os.AsyncTask<URL, Void, String>{
     protected void onPostExecute(String movieResult) {
         MovieDetailActivity movieDetailActivity = movieDetailActivityWeakReference.get();
 
-        try{
-            movieDetailActivity.mMovieDetail = JsonUtils.getMovieForDetailActivity(movieResult);
-            movieDetailActivity.initViews();
+        if (movieResult != null) {
+            try {
+                movieDetailActivity.mMovieDetail = JsonUtils.getMovieForDetailActivity(movieResult);
+            } catch (JSONException jse) {
+                jse.printStackTrace();
+            }
+            movieDetailActivity.setData();
             movieDetailActivity.showDetails();
-        }
-        catch(JSONException jse){
-            jse.printStackTrace();
+        } else {
+            movieDetailActivity.showErrorMsg();
         }
     }
 }

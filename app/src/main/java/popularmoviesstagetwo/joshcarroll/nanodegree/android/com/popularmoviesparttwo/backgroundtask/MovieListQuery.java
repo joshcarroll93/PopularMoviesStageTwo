@@ -72,7 +72,7 @@ public class MovieListQuery extends android.os.AsyncTask<URL, Void, String>{
             }
 
         } else {
-            movieTabLayoutFragment.showErrorMessage();
+            movieTabLayoutFragment.showErrorMessage("Unable To Load Data!");
         }
     }
 }

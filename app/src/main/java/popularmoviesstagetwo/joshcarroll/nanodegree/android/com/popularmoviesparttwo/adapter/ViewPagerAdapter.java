@@ -1,8 +1,10 @@
 package popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 
 import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.fragment.MovieTabLayoutFragment;
@@ -12,10 +14,6 @@ import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviespar
  */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-
-    private MovieTabLayoutFragment popularMoviesFragment;
-    private MovieTabLayoutFragment topRatedMoviesFragment;
-    private MovieTabLayoutFragment favouriteMoviesFragment;
 
     public ViewPagerAdapter(FragmentManager manager) {
         super(manager);
@@ -31,18 +29,19 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return 3;
     }
 
+    @NonNull
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
-        switch (position){
-            case 0 :
-                popularMoviesFragment = (MovieTabLayoutFragment) createdFragment;
+        switch (position) {
+            case 0:
+                MovieTabLayoutFragment popularMoviesFragment = (MovieTabLayoutFragment) createdFragment;
                 break;
-            case 1 :
-                topRatedMoviesFragment = (MovieTabLayoutFragment) createdFragment;
+            case 1:
+                MovieTabLayoutFragment topRatedMoviesFragment = (MovieTabLayoutFragment) createdFragment;
                 break;
-            case 2 :
-                favouriteMoviesFragment = (MovieTabLayoutFragment) createdFragment;
+            case 2:
+                MovieTabLayoutFragment favouriteMoviesFragment = (MovieTabLayoutFragment) createdFragment;
         }
         return createdFragment;
     }
@@ -50,11 +49,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
 
-        switch (position){
-            case 0 :
+        switch (position) {
+            case 0:
                 return "Popular";
 
-            case 1 :
+            case 1:
                 return "Top Rated";
 
             case 2:

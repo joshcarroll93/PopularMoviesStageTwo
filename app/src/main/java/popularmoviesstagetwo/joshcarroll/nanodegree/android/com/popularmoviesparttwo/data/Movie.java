@@ -12,24 +12,27 @@ public class Movie implements Parcelable {
     private int mId;
     private String mPosterPath;
 
-    public Movie(int id, String posterPath){
+    public Movie(int id, String posterPath) {
 
         mId = id;
         mPosterPath = posterPath;
     }
-    private Movie(Parcel parcel){
+
+    private Movie(Parcel parcel) {
         mId = parcel.readInt();
         mPosterPath = parcel.readString();
     }
 
-    public int getId(){return mId;}
+    public int getId() {
+        return mId;
+    }
 
-    public void setId(int id){mId = id;}
+    public void setId(int id) {
+        mId = id;
+    }
 
     public String getPosterPath() {
-        String MDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w780/";
-
-        return MDB_IMAGE_BASE_URL + mPosterPath;
+        return mPosterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -47,6 +50,7 @@ public class Movie implements Parcelable {
         parcel.writeInt(mId);
         parcel.writeString(mPosterPath);
     }
+
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
         @Override
         public Movie createFromParcel(Parcel parcel) {

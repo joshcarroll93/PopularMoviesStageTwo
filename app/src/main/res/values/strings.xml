@@ -7,14 +7,14 @@
     <string name="popular">Popular</string>
     <string name="popular_api">popular</string>
     <string name="top_rated">Top Rated</string>
+    <string name="favourites">Favourites</string>
     <string name="top_rated_api">top_rated</string>
     <string name="error_msg">Error Finding Data</string>
     <string name="movie_detail_poster">Movie Detail Poster</string>
     <string name="movie_detail">Movie Details</string>
     <string name="trailers">Trailers</string>
     <string name="reviews">Reviews</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_msg_reviews">No reviews Found</string>
+    <string name="error_msg_trailers">No Trailers Found</string>
 </resources>
 

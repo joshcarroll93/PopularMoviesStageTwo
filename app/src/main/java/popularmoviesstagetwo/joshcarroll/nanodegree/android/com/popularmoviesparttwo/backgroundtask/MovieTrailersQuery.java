@@ -22,8 +22,8 @@ public class MovieTrailersQuery extends AsyncTask<URL, Void, String> {
 
     private WeakReference<MovieDetailActivity> movieTrailersTaskWeakReference;
 
-    public MovieTrailersQuery(MovieDetailActivity movieDetailActivity){
-        movieTrailersTaskWeakReference = new WeakReference<MovieDetailActivity>(movieDetailActivity);
+    public MovieTrailersQuery(MovieDetailActivity movieDetailActivity) {
+        movieTrailersTaskWeakReference = new WeakReference<>(movieDetailActivity);
 
     }
 
@@ -32,10 +32,9 @@ public class MovieTrailersQuery extends AsyncTask<URL, Void, String> {
         URL searchURL = urls[0];
         String trailerResult = null;
 
-        try{
+        try {
             trailerResult = NetworkUtils.getResponseFromHttpUrl(searchURL);
-        }
-        catch(IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return trailerResult;
@@ -45,13 +44,16 @@ public class MovieTrailersQuery extends AsyncTask<URL, Void, String> {
     protected void onPostExecute(String trailersResult) {
         MovieDetailActivity movieDetailActivity = movieTrailersTaskWeakReference.get();
 
-        if(trailersResult != null){
+        if (trailersResult != null) {
+            movieDetailActivity.showTrailers();
             try {
                 List<Trailer> trailers = JsonUtils.getMovieTrailers(trailersResult);
                 movieDetailActivity.movieTrailersAdapter.addTrailers(trailers);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        } else {
+            movieDetailActivity.hideTrailers();
         }
     }
 }
