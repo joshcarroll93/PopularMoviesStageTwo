@@ -182,7 +182,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Picasso.with(getApplicationContext()).load(mMovieDetail.getmBackdropPath())
                 .placeholder(R.drawable.ic_movie_black_48dp)
-                .centerCrop()
                 .into(toolbarImage);
         Picasso.with(getApplicationContext()).load(mMovieDetail.getmPosterPath())
                 .placeholder(R.drawable.ic_movie_black_48dp)

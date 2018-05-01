@@ -136,7 +136,7 @@ public class MovieTabLayoutFragment extends Fragment implements NewFavouriteList
 
     public void makeMovieSearchQuery(String sortBy) {
         //checking for restored state
-        if (movies.size() > 0) {
+        if (movies.size() > 0 && pageNumber <= 1) {
             mRecyclerView.setVisibility(View.VISIBLE);
             mMovieAdapter.clearList();
             mMovieAdapter.addItems(movies);
