@@ -140,7 +140,6 @@ public class MovieTabLayoutFragment extends Fragment implements NewFavouriteList
             mRecyclerView.setVisibility(View.VISIBLE);
             mMovieAdapter.clearList();
             mMovieAdapter.addItems(movies);
-            Toast.makeText(getContext(), "Restored", Toast.LENGTH_SHORT).show();
         } else {
             URL movieSearchUrl = NetworkUtils.buildUrlForMovieList(sortBy, pageNumber);
             new MovieListQuery(this).execute(movieSearchUrl);
