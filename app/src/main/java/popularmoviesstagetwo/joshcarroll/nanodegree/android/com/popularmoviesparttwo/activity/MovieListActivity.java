@@ -11,7 +11,6 @@ import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviespar
 import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.adapter.ViewPagerAdapter;
 
 public class MovieListActivity extends AppCompatActivity {
-    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class MovieListActivity extends AppCompatActivity {
         if (actionBar != null)
             actionBar.hide();
 
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(viewPagerAdapter);

@@ -9,9 +9,7 @@ import android.os.Parcelable;
 
 public class MovieDetail implements Parcelable {
 
-    String MDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
-    String MDB_IMAGE_SIZE_500 = "w500/";
-    String MDB_IMAGE_SIZE_342 = "w342/";
+    private String MDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
 
     private String mTitle;
     private int mRuntime;
@@ -86,6 +84,7 @@ public class MovieDetail implements Parcelable {
     }
 
     public String getmPosterPath() {
+        String MDB_IMAGE_SIZE_342 = "w342/";
         return MDB_IMAGE_BASE_URL + MDB_IMAGE_SIZE_342 + mPosterPath;
     }
 
@@ -94,6 +93,7 @@ public class MovieDetail implements Parcelable {
     }
 
     public String getmBackdropPath() {
+        String MDB_IMAGE_SIZE_500 = "w500/";
         return MDB_IMAGE_BASE_URL + MDB_IMAGE_SIZE_500 + mBackdropPath;
     }
 

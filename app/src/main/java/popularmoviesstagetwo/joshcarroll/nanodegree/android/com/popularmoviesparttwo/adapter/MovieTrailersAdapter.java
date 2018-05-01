@@ -3,24 +3,19 @@ package popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviespa
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.R;
-import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.data.MovieDetail;
 import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.data.Trailer;
 
 /**
@@ -57,7 +52,9 @@ public class MovieTrailersAdapter extends RecyclerView.Adapter<MovieTrailersAdap
 
         final String key = mTrailers.get(position).getKey();
 
-        Picasso.with(mContext).load(thumbnailBaseUrl + key + "/hqdefault.jpg").into(holder.playButtonImage);
+        Picasso.with(mContext).load(thumbnailBaseUrl + key + "/hqdefault.jpg")
+                .placeholder(R.drawable.ic_movie_black_48dp)
+                .into(holder.playButtonImage);
 
 
         holder.playButtonImage.setOnClickListener(new View.OnClickListener() {

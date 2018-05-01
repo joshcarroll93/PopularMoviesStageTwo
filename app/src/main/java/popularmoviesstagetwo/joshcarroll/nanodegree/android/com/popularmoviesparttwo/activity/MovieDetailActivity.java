@@ -71,6 +71,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_movie_detail);
 
         ActionBar actionBar = getSupportActionBar();
@@ -181,6 +182,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Picasso.with(getApplicationContext()).load(mMovieDetail.getmBackdropPath())
                 .placeholder(R.drawable.ic_movie_black_48dp)
+                .centerCrop()
                 .into(toolbarImage);
         Picasso.with(getApplicationContext()).load(mMovieDetail.getmPosterPath())
                 .placeholder(R.drawable.ic_movie_black_48dp)

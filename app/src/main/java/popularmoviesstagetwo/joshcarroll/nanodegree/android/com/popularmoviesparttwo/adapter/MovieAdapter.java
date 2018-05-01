@@ -1,7 +1,11 @@
 package popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +23,7 @@ import java.util.List;
 import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.R;
 import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.activity.MovieDetailActivity;
 import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.data.Movie;
+import popularmoviesstagetwo.joshcarroll.nanodegree.android.com.popularmoviesparttwo.provider.MovieContract;
 
 /**
  * Created by Josh on 27/03/2018.
@@ -28,6 +34,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     private String TAG = getClass().getSimpleName();
     private Context mContext;
     private List<Movie> mMovies;
+    private int mFragmentNumber;
 
     public MovieAdapter(Context context, List<Movie> movies) {
         mContext = context;
@@ -35,6 +42,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Picasso.with(mContext).setIndicatorsEnabled(false);
     }
 
+    public void setFragNumber(int fragNumber){
+        mFragmentNumber = fragNumber;
+    }
     public void addItems(List<Movie> newMovies) {
         if (mMovies != null)
             mMovies.addAll(newMovies);
@@ -103,9 +113,55 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 viewContext.startActivity(intent);
             }
         });
-    }
 
-    static class MovieViewHolder extends RecyclerView.ViewHolder {
+        movieViewHolder.moviePoster.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                if(mFragmentNumber == 3){
+
+                    confirmDelete(movieViewHolder.getAdapterPosition());
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+    private void confirmDelete(final int id) {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(mContext);
+        }
+        builder.setTitle("Delete Movie")
+                .setMessage("Are you sure you want to delete this movie?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        Movie movie = getItem(id);
+                        int movie_id = movie.getId();
+
+                        String stringId = Integer.toString(movie_id);
+                        Uri uri = MovieContract.MovieEntry.CONTENT_URI;
+                        uri = uri.buildUpon().appendPath(stringId).build();
+
+                        int i = mContext.getContentResolver().delete(uri, null, null);
+
+                        removeItem(id);
+
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // restore item
+                        notifyItemChanged(id);
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+    static class MovieViewHolder extends RecyclerView.ViewHolder  {
 
         private ImageView moviePoster;
 
